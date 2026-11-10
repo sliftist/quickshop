@@ -2,6 +2,7 @@ node_modules
 build
 build-extension
 build-extension-prod
+quick-shop.zip
 build-nodejs
 build-electron
 build-extension
@@ -27,6 +28,7 @@ data
 *.jpeg
 *.png
 !assets/*.png
+!store-assets/*.png
 *.gif
 *.bmp
 *.tiff

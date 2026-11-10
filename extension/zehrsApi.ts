@@ -193,6 +193,10 @@ function getDateParam() {
 
 async function apiRequest(config: { path: string; method: "GET" | "POST"; body?: unknown; keepalive?: boolean }): Promise<unknown> {
     let headers = await getSiteHeaders({ locale: LANG, banner: BANNER });
+    let hasContentType = Object.keys(headers).some(name => name.toLowerCase() === "content-type");
+    if (config.body !== undefined && !hasContentType) {
+        headers["Content-Type"] = "application/json";
+    }
     let url = `${API_BASE}${config.path}`;
     let response = await fetch(url, {
         method: config.method,

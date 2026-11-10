@@ -8,6 +8,8 @@ The extension does not build these headers itself. The site's own client code ha
 
 The function lives in a module of the site's Turbopack bundle. The extension reaches it by registering a tiny module of its own with the page's Turbopack runtime (`globalThis.TURBOPACK.push`), which hands that module the runtime context; the context's module cache (`context.c`) is then searched for the loaded module that exports `getAuthPCXBffHeaders`. Module ids change with every site build, so it is found by export name, never by id.
 
+Some pages (the cart review page, and the other pages of the older "Bronx" app) have no Turbopack runtime; they are built with webpack. There the extension finds the page's webpack chunk array by its contents (entries shaped `[[chunkIds], {modules}]`, so analytics arrays like `dataLayer` are never touched), pushes a bridge chunk whose runtime callback receives webpack's `require`, and searches `require.c` for two things: the site's request-builder class (identified by its `getRequestHeaders`, `_getDefaultHeaders`, `_getRequestHeaders` and `withAuthHeaders` methods), and the `getPcidClient` export. A builder constructed as a BFF request (`new Builder(path, false, false, true)`) yields the site's headers from `_getDefaultHeaders()` and `_getRequestHeaders()`, and `Authorization: Bearer <token>` comes from `getPcidClient().ensureFreshToken()`, the site's own login client, which refreshes the token when needed. These headers have no `Content-Type` (the site's HTTP library adds it), so the extension adds `Content-Type: application/json` on requests with a body.
+
 ## Session values (cookies)
 
 - `last_selected_store`: the store id (a 4-digit code), used as `storeId` and `sellerId`.

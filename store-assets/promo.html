@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Quick Shop promo art</title>
+<style>
+    :root {
+        --accent-light: hsl(174, 60%, 72%);
+        --ink: hsl(200, 40%, 7%);
+        --deep: hsl(190, 55%, 14%);
+        --glow: hsl(174, 70%, 27%);
+    }
+    html, body {
+        margin: 0;
+        padding: 0;
+        background: var(--ink);
+        overflow: hidden;
+    }
+    body {
+        font-family: "Segoe UI", Inter, Roboto, Arial, sans-serif;
+    }
+    .art {
+        position: relative;
+        overflow: hidden;
+        color: white;
+        background: radial-gradient(circle at 80% 15%, var(--glow) 0%, var(--deep) 55%, var(--ink) 100%);
+    }
+    .name {
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1;
+    }
+    .tagline {
+        color: var(--accent-light);
+        font-weight: 600;
+        line-height: 1.25;
+    }
+    .frame {
+        position: absolute;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.14);
+        background: white;
+    }
+    .frame img {
+        position: absolute;
+        display: block;
+    }
+    .pill {
+        display: inline-block;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 999px;
+        color: rgba(255, 255, 255, 0.88);
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .art.promo {
+        width: 440px;
+        height: 280px;
+    }
+    .promo .text {
+        position: absolute;
+        left: 24px;
+        top: 0;
+        bottom: 0;
+        width: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+    }
+    .promo .name {
+        font-size: 40px;
+    }
+    .promo .tagline {
+        font-size: 16px;
+    }
+    .promo .frame {
+        left: 236px;
+        top: 34px;
+        width: 260px;
+        height: 214px;
+    }
+    .promo .frame img {
+        width: 538px;
+        left: -14px;
+        top: -12px;
+    }
+    .art.marquee {
+        width: 1400px;
+        height: 560px;
+    }
+    .marquee .text {
+        position: absolute;
+        left: 80px;
+        top: 0;
+        bottom: 0;
+        width: 470px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+    }
+    .marquee .name {
+        font-size: 92px;
+    }
+    .marquee .tagline {
+        font-size: 30px;
+    }
+    .marquee .points {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .marquee .pill {
+        font-size: 17px;
+        padding: 7px 15px;
+    }
+    .marquee .frame {
+        left: 610px;
+        top: 64px;
+        width: 860px;
+        height: 560px;
+    }
+    .marquee .frame img {
+        width: 1000px;
+        left: -22px;
+        top: -30px;
+    }
+</style>
+</head>
+<body>
+    <div class="art" id="art">
+        <div class="text">
+            <div class="name">Quick Shop</div>
+            <div class="tagline" id="tagline"></div>
+            <div class="points" id="points"></div>
+        </div>
+        <div class="frame"><img id="image" alt=""></div>
+    </div>
+    <script>
+        const params = new URLSearchParams(location.search);
+        const size = params.get("size") === "marquee" ? "marquee" : "promo";
+        const art = document.getElementById("art");
+        art.classList.add(size);
+        document.getElementById("image").src = params.get("image") || "";
+        document.getElementById("tagline").textContent = size === "marquee"
+            ? "Search and fill your Zehrs cart from one fast window, without page reloads."
+            : "Fill your Zehrs cart without page reloads";
+        if (size === "marquee") {
+            for (const label of ["Instant search", "One-click add", "Unit-cost bars", "Keyboard friendly"]) {
+                const pill = document.createElement("span");
+                pill.className = "pill";
+                pill.textContent = label;
+                document.getElementById("points").appendChild(pill);
+            }
+        }
+    </script>
+</body>
+</html>

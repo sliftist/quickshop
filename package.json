@@ -12,7 +12,9 @@
         "build-extension": "build-extension && typenode ./bin/buildPageScript.ts",
         "build-extension-prod": "typenode ./bin/buildProduction.ts",
         "watch-extension": "typenode ./bin/watch.ts --port 9878 \"yarn build-extension\" --delayed-command \"yarn build-extension-prod\"",
-        "reload-extension": "typenode ./bin/trigger.ts --port 9878"
+        "reload-extension": "typenode ./bin/trigger.ts --port 9878",
+        "make-icons": "typenode ./bin/makeIcons.ts",
+        "package-extension": "yarn build-extension-prod && C:/Windows/System32/tar.exe -a -cf quick-shop.zip -C build-extension-prod manifest.json extPage.js assets"
     },
     "resolutions": {
         "preact": "npm:preact-old-types@*"

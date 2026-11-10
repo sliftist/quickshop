@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Quick Shop",
     "version": "1.0.0",
-    "description": "Search Zehrs and add items to your cart from a fast in-page window, without page reloads.",
+    "description": "Search groceries and add them to your cart from a fast in-page window, without page reloads.",
     "background": {
         "service_worker": "extBackground.js"
     },
