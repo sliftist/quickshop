@@ -1,0 +1,41 @@
+{
+    "manifest_version": 3,
+    "name": "Quick Shop",
+    "version": "1.0.0",
+    "description": "Search Zehrs and add items to your cart from a fast in-page window, without page reloads.",
+    "background": {
+        "service_worker": "extBackground.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.zehrs.ca/*"
+            ],
+            "js": [
+                "extContentScript.js"
+            ]
+        },
+        {
+            "matches": [
+                "*://*.zehrs.ca/*"
+            ],
+            "js": [
+                "extPage.js"
+            ],
+            "world": "MAIN",
+            "run_at": "document_idle"
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "storage"
+    ],
+    "host_permissions": [
+        "*://*.zehrs.ca/*"
+    ],
+    "icons": {
+        "16": "assets/icon16.png",
+        "48": "assets/icon48.png",
+        "128": "assets/icon128.png"
+    }
+}
