@@ -29,6 +29,7 @@ data
 *.png
 !assets/*.png
 !store-assets/*.png
+!docs/images/*.png
 *.gif
 *.bmp
 *.tiff
